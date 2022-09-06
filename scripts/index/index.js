@@ -1,25 +1,94 @@
 import {recipes} from "../data/recipes.js";
 import {CardRecip} from "../facto/recipes.js";
 
-console.log(recipes)
+let dataArray;
+const cardsSection = document.querySelector(".card-section")
+const searchBar = document.querySelector('#search')
+const iconeTag = document.querySelector('.icone-preview')
+// const dropdownContainerOne = document.querySelector(".dropBox");
 
-function displayRecipes(recipes) {
-    const cardsSection = document.querySelector(".card-section");
-    cardsSection.innerHTML= '';
-    recipes.forEach((item) => {
-        const recipesTemplates = new CardRecip(item);
+
+function getUser() {
+    const res = recipes
+
+    dataArray = orderList(res)
+    createRecipesList(dataArray)
+    // console.log(dataArray)
+}
+
+function orderList(data) {
+
+    const orderData = data.sort((a, b)=> {
+        if( a.name.toLowerCase() < b.name.toLowerCase()) {
+            return -1;
+        }
+        if( a.name.toLowerCase() > b.name.toLowerCase()) {
+            return 1;
+        }
+        return 0;
+        })
+
+    return orderData;
+
+}
+
+function createRecipesList(userList) {
+    userList.forEach(user => {
+
+        const recipesTemplates = new CardRecip(user);
         const cardDom = recipesTemplates.getCardDom();
-        cardsSection.innerHTML += cardDom;
-// ne pas oublier le +
-        console.log(CardRecip)
+    
+        cardsSection.innerHTML += cardDom
     });
 }
 
-function init(){
-    displayRecipes(recipes);
+searchBar.addEventListener("keyup" , filterData);
+
+
+function filterData(e){
+    cardsSection.innerHTML = "";
+
+    const searchString = e.target.value.toLowerCase();
+    // const filterArr = dataArray.filter(el => el.name.toLowerCase().includes(searchString) || el.description.toLowerCase().includes(searchString) || el.ingredients.ingredient.toLowerCase().includes(searchString));
+    
+    const filterArr = dataArray.map(element => { element.ingredients.filter(subelem => {
+        console.log(subelem.ingredient)
+      });
+    });
+    if(filterArr == 0 ){
+        return cardsSection.innerHTML= `
+        <div class="recipe-defaut">
+                <div class="recipe-defaut-txt">
+                    <h5>Aucune recette ne correspond à votre critère… vous pouvez
+                    chercher « tarte aux pommes », « poisson », etc.</h5>
+                </div>
+        </div>`;
+    };
+
+    if(searchString.length < 3 && searchString.length > 0){
+        return cardsSection.innerHTML=`
+        <div class="recipe-defaut">
+            <div class="recipe-defaut-txt">
+                <h5>Veuillez entrer plus de caractères dans le champ de recherche</h5>
+            </div>
+    </div>`;
+    } else {
+        createRecipesList(filterArr);
+    };
+
 }
 
-init();
+getUser()
 
-// trier liste alpha 
-// masquer dropdown a la recherche 
+
+iconeTag.addEventListener("click", openModalTag);
+const dropdownIngredient = document.querySelector('.dropdown-ingredient')
+
+function openModalTag() {
+    if(dropdownIngredient.style.display === 'none') {
+        dropdownIngredient.style.display = 'block';
+    }else{
+        dropdownIngredient.style.display = 'none';
+    }
+}
+

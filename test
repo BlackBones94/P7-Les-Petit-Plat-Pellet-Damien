@@ -1,0 +1,26 @@
+const allUstensils = [];
+const allAppliance = [];
+const ingredientDiv = document.querySelector('.dropdown-ingredient');
+
+console.log(ingredientDiv)
+// ingredient
+
+
+// ustensile 
+
+for(let i=0; i< recipes.length; i++) {
+    let ustensils = recipes[i].ustensils;
+    allUstensils.push(ustensils)
+}
+
+export const ustensilsNoRepeat = new Set(allUstensils.sort());
+console.log(ustensilsNoRepeat)
+
+// appareil 
+
+for(let i=0; i< recipes.length; i++) {
+    let appliances = recipes[i].appliance;
+    allAppliance.push(appliances)
+}
+ const applianceNoRepeat = new Set(allAppliance.sort());
+console.log(applianceNoRepeat)

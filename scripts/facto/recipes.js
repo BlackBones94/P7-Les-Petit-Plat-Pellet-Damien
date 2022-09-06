@@ -14,7 +14,7 @@ export class CardRecip {
 
     getCardDom(){
         return `
-        <article id="${this.id}">
+        <article id="${this.id}" class="fiche-recette">
             <div class="recipe-img">
                 <svg width="380" height="178" viewBox="0 0 380 178" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0 5C0 2.23858 2.23858 0 5 0H375C377.761 0 380 2.23858 380 5V178H0V5Z" fill="#C7BEBE"/>
@@ -34,7 +34,7 @@ export class CardRecip {
                     ${"unit" in ingredient ? ingredient.unit : ""}`)}</li>                
                     </ul>
 
-                    <p class="recipe-description">${this.description.substring(0,180)}${this.description.length > 180 ? "...": ""}</p>
+                    <p class="recipe-description">${this.description.substring(0,220)}${this.description.length > 180 ? "...": ""}</p>
                 </div>
             </div>
         </article>

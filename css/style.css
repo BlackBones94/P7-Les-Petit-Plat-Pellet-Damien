@@ -39,10 +39,7 @@ form{
 }
 
 .topnav{
-
- 
   margin: 1% 10% 1% 10%;
- 
 }
 
 .topnav input {
@@ -65,159 +62,27 @@ form{
 }
 
 
-/* dropdown ingredient */
+/* dropdown  */
 
 .dropBox{
-  padding-top: 10%;
+  padding-top: 5%;
   margin: 1% 10% 1% 10%;
 }
 
-.dropbtn-ingredient {
-    background-color: #3282F7;
-    color: white;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-    width: 170px;
-    height: 69px;
-    border-radius: 5px;
-  }
-  
-  .dropbtn-ingredient:hover, .dropbtn-ingredient:focus {
-    background-color: #3282F7;
-  }
+
   
   .dropdown {
      position: relative; 
-     display: inline-block;
-    /* display: flex; */
+     display: flex;
   }
-  
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #3282F7;
-    min-width: 160px;
-    overflow: auto;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
+ 
+  .dropdown form input{
+    margin-right: 5%;
   }
-  
-  .ingredient-link{
-    background-color: #3282F7;
-    
-  }
-  .dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-  }
-  
-  .dropdown a:hover {background-color: #ddd;}
-  
-  .show {display: block;}
 
-  /* dropdown appareils */
-
-  .dropbtn-appareils {
-    /* display: flex; */
-    background-color: #68D9A4;
-    color: white;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
+  .icone-preview{
     cursor: pointer;
-    width: 170px;
-    height: 69px;
-    border-radius: 5px;
-
   }
-  
-  .dropbtn-appareils:hover, .dropbtn-appareils:focus {
-    background-color: #68D9A4;
-  }
-  
-  .dropdown {
-    position: relative;
-    display: inline-block;
-
-  }
-  
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color:#68D9A4;
-    min-width: 160px;
-    overflow: auto;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-  }
-
-  .appareils-link{
-    background-color: #68D9A4;
-  }
-  
-  /* .dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-
-    text-decoration: none;
-    display: block;
-  } */
-  
-  .dropdown a:hover {background-color: #ddd;}
-  
-  .show {display: block;}
-
-  /* dropdown ustensiles */
-
-  .dropbtn-ustensiles {
-    /* display: flex; */
-    background-color: #ED6454;
-    color: white;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-    width: 170px;
-    height: 69px;
-    border-radius: 5px;
-  }
-  
-  .dropbtn-ustensiles:hover, .dropbtn-ustensiles:focus {
-    background-color:  #ED6454;
-  }
-  
-  .dropdown {
-    position: relative;
-    display: inline-block;
-  }
-  
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #ED6454;
-    min-width: 160px;
-    overflow: auto;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-  }
-  .ustensiles-link {
-    background-color: #ED6454;
-  }
-  
-  /* .dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-  } */
-  
-  .dropdown a:hover {background-color: #ddd;}
-  
-  .show {display: block;}
 
   /* card recipe */
 
@@ -256,6 +121,7 @@ form{
     top: 25px;
     padding-right: 5%;
   }
+  
   .recipe-ingredients {
     list-style: none;
     width: 171px;
@@ -281,3 +147,77 @@ form{
     font-size: 12px;
   }
  
+
+  /* card recipe defaut  */
+
+  .recipe-defaut {
+    background-color: #E7E7E7;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    border-radius: 10px;
+  }
+
+  .recipe-defaut-txt {
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+  }
+  /* test search input  */
+
+  .search-input {
+    display: flex;
+  }
+
+  #search-ingredient{
+    background-color: #3282F7;
+    border-radius: 5px;
+    border: 0;
+    color: #FFFFFF;
+
+  }
+
+  #search-ingredient::placeholder{
+    color: #FFFFFF;
+
+  }
+
+  #search-appareil{
+    background-color: #68D9A4;
+    border-radius: 5px;
+    border: 0;
+    color: #FFFFFF;
+  }
+
+  #search-appareil::placeholder{
+    color: #FFFFFF;
+
+  }
+
+  #search-ustensiles{
+    background-color: #ED6454;
+    border-radius: 5px;
+    border: 0;
+    color: #FFFFFF;
+  }
+
+  #search-ustensiles::placeholder{
+    color: #FFFFFF;
+
+  }
+
+  .search-input i {
+    position: relative;
+    right: 20%;
+    top: 40%;
+  }
+
+
+
+  /* essai block ingredient  */
+
+  .dropdown-ingredient{
+    width: 400px;
+    height: 200px;
+    background-color: #3282F7;
+  }
