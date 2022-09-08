@@ -49,12 +49,23 @@ function filterData(e){
     cardsSection.innerHTML = "";
 
     const searchString = e.target.value.toLowerCase();
-    // const filterArr = dataArray.filter(el => el.name.toLowerCase().includes(searchString) || el.description.toLowerCase().includes(searchString) || el.ingredients.ingredient.toLowerCase().includes(searchString));
-    
-    const filterArr = dataArray.map(element => { element.ingredients.filter(subelem => {
-        console.log(subelem.ingredient)
-      });
+    const filterArr = dataArray.filter(el => {
+        if( el.name.toLowerCase().includes(searchString)){
+            return true;
+        } 
+
+        if( el.description.toLowerCase().includes(searchString)){
+            return true;
+        } 
+
+        for(let ingredient of el.ingredients){
+            console.log(ingredient.ingredient , searchString)
+            if(ingredient.ingredient.toLowerCase().includes(searchString)){
+                return true;
+            }  
+        }
     });
+    //  changement ingredients name pour confusion 
     if(filterArr == 0 ){
         return cardsSection.innerHTML= `
         <div class="recipe-defaut">
