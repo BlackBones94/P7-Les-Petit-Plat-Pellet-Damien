@@ -1,12 +1,14 @@
 import {recipes} from "../data/recipes.js";
 import {CardRecip} from "../facto/recipes.js";
 
+
 let dataArray;
 const cardsSection = document.querySelector(".card-section")
 const searchBar = document.querySelector('#search')
 const iconeTag = document.querySelector('.icone-preview')
 // const dropdownContainerOne = document.querySelector(".dropBox");
-
+const iconeTag2 = document.querySelector('.icone-preview-2')
+const iconeTag3 = document.querySelector('.icone-preview-3')
 
 function getUser() {
     const res = recipes
@@ -15,7 +17,6 @@ function getUser() {
     createRecipesList(dataArray)
     // console.log(dataArray)
 }
-
 function orderList(data) {
 
     const orderData = data.sort((a, b)=> {
@@ -92,14 +93,44 @@ function filterData(e){
 getUser()
 
 
-iconeTag.addEventListener("click", openModalTag);
-const dropdownIngredient = document.querySelector('.dropdown-ingredient')
+iconeTag.addEventListener("click", openModalIngredient);
+iconeTag2.addEventListener("click" , openModalAppareil);
+iconeTag3.addEventListener("click" , openModalUstensiles)
 
-function openModalTag() {
+
+export const dropdownIngredient = document.querySelector('.dropdown-ingredient')
+export const dropdownAppareil = document.querySelector('.dropdown-appareil')
+export const dropdownUstensiles = document.querySelector('.dropdown-ustensiles')
+const ingredientInput = document.getElementById('search-ingredient')
+const appareilInput = document.getElementById('search-appareil')
+const ustensileInput = document.getElementById('search-ustensiles')
+
+function openModalIngredient() {
     if(dropdownIngredient.style.display === 'none') {
         dropdownIngredient.style.display = 'block';
+        ingredientInput.style.width = '667px'
     }else{
         dropdownIngredient.style.display = 'none';
+        ingredientInput.style.width = "170px"
     }
 }
 
+function openModalAppareil() {
+    if(dropdownAppareil.style.display === 'none'){
+        dropdownAppareil.style.display = 'block';
+        appareilInput.style.width = '667px'
+    }else{
+        dropdownAppareil.style.display = 'none';
+        appareilInput.style.width = "170px";
+    };
+}
+
+function openModalUstensiles() {
+    if(dropdownUstensiles.style.display === 'none'){
+        dropdownUstensiles.style.display = 'block';
+        ustensileInput.style.width = '667px'
+    }else{
+        dropdownUstensiles.style.display = 'none';
+        ustensileInput.style.width = "170px";
+    };
+}

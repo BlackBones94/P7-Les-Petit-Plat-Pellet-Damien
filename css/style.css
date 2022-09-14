@@ -32,6 +32,10 @@ body{
 
 /* searchBox */
 
+input[type="search"]::placeholder {
+  padding-left: 10px;
+}
+
 form{
   display: flex;
   flex-direction: row;
@@ -80,7 +84,7 @@ form{
     margin-right: 5%;
   }
 
-  .icone-preview{
+  .icone-preview , .icone-preview-2 , .icone-preview-3{
     cursor: pointer;
   }
 
@@ -167,14 +171,16 @@ form{
 
   .search-input {
     display: flex;
+
   }
 
   #search-ingredient{
+    width: 170px;
     background-color: #3282F7;
     border-radius: 5px;
     border: 0;
     color: #FFFFFF;
-
+    outline: none;
   }
 
   #search-ingredient::placeholder{
@@ -183,9 +189,11 @@ form{
   }
 
   #search-appareil{
+    width: 170px;
     background-color: #68D9A4;
     border-radius: 5px;
     border: 0;
+    outline: none;
     color: #FFFFFF;
   }
 
@@ -195,9 +203,11 @@ form{
   }
 
   #search-ustensiles{
+    width: 170px;
     background-color: #ED6454;
     border-radius: 5px;
     border: 0;
+    outline: none;
     color: #FFFFFF;
   }
 
@@ -214,10 +224,61 @@ form{
 
 
 
-  /* essai block ingredient  */
+  /* essai block dropdown  */
+  .dropdown-appareil{
+    margin: 0;
+    border-radius: 5px;
+    position: absolute;
+    top: 50px;
+    /* right: 189px; */
+    z-index: 1;
+    width: 633px;
+    height: 200px;
+    background-color: #68D9A4;
+    display: none;
+
+  }
+
+  .dropdown-ustensiles{
+      margin: 0;
+      border-radius: 5px;
+      position: absolute;
+      top: 50px;
+      /* right: 189px; */
+      z-index: 1;
+      width: 633px;
+      height: 200px;
+      background-color: #ED6454;
+      display: none;
+  }
 
   .dropdown-ingredient{
-    width: 400px;
+    margin: 0;
+    border-radius: 5px;
+    position: absolute;
+    top: 50px;
+    z-index: 1;
+    width: 633px;
     height: 200px;
     background-color: #3282F7;
+    display: none;
   }
+
+  #dropdown-ingredient-list, #dropdown-appareil-list ,#dropdown-ustensiles-list{
+    height: 200px;
+    columns: 3;   
+    overflow: auto;
+    margin:0;
+ 
+  }
+
+  #dropdown-ingredient-list li,#dropdown-appareil-list li, #dropdown-ustensiles-list li {
+    font-weight: 400;
+    font-size: 18px;
+    list-style-type: none;
+    color: white;
+    line-height: 21.6px;
+    cursor: pointer;
+  }
+
+  
