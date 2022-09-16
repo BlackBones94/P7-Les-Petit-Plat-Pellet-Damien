@@ -1,6 +1,6 @@
 import {recipes} from "../data/recipes.js";
 import {CardRecip} from "../facto/recipes.js";
-
+import {TagAppliance} from "../facto/tagFilter.js"
 
 let dataArray;
 const cardsSection = document.querySelector(".card-section")
@@ -134,3 +134,5 @@ function openModalUstensiles() {
         ustensileInput.style.width = "170px";
     };
 }
+
+
