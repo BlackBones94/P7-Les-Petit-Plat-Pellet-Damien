@@ -1,6 +1,5 @@
 import {recipes} from "../data/recipes.js";
 import {CardRecip} from "../facto/recipes.js";
-import {TagAppliance} from "../facto/tagFilter.js"
 
 let dataArray;
 const cardsSection = document.querySelector(".card-section")
@@ -17,6 +16,7 @@ function getUser() {
     createRecipesList(dataArray)
     // console.log(dataArray)
 }
+
 function orderList(data) {
 
     const orderData = data.sort((a, b)=> {
@@ -66,6 +66,8 @@ function filterData(e){
             }  
         }
     });
+
+    // trouver pour ingredient methode some sur array
     //  changement ingredients name pour confusion 
     if(filterArr == 0 ){
         return cardsSection.innerHTML= `

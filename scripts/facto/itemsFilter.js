@@ -12,7 +12,9 @@ let listIngredient = document.getElementById("dropdown-ingredient-list");
 let listUstensils = document.getElementById("dropdown-ustensiles-list");
 const ingredientSearch = document.querySelector("#search-ingredient")
 const tagField = document.querySelector('.tag-section')
+
 /////////////////////// BOUCLE FOR //////////////////////////////
+
 for(let i=0; i< recipes.length; i++) {
     let ingredients = recipes[i].ingredients;
     ingredients.map(({ingredient}) =>{
@@ -36,6 +38,11 @@ for(let i=0; i< recipes.length; i++) {
 }
 ////////////////////////////////////////////////////////////////
 
+// creer tab global current recipes
+// mettre boucle for dans le tableau 
+// destructuring [... TEST] POUR TAB ET OBJET 
+// TRIER CONTENUE AVEC SORT
+
 
 // appareil 
 export function applianceItem(){
@@ -47,14 +54,26 @@ export function applianceItem(){
         appLi.innerText = item;
         listAppareil.appendChild(appLi)
 
-        appLi.addEventListener('click' , function(e) {
+        // click  des element appliance 
 
+        appLi.addEventListener('click' , function(e) {
             // finir tag section 
+            const newDropAppliance = document.createElement('div')
+            const p = document.createElement('p')
+            const iCircle = document.createElement('i')
+            iCircle.className = "fa-regular fa-circle-xmark"
+            newDropAppliance.className = 'dropdown-appliance-tag'
+            newDropAppliance.appendChild(p)
+            newDropAppliance.appendChild(iCircle)
+            p.innerHTML = e.target.innerHTML
+            tagField.appendChild(newDropAppliance)   
             
-            console.log(e.target.innerHTML)
-            tagField.innerHTML = e.target.innerHTML;
-            
+            iCircle.addEventListener('click' ,function(e) {
+                newDropAppliance.style.display ="none"
+            })
         })
+
+    
     })
 
  
@@ -69,6 +88,22 @@ function ingredientItem() {
             let ingLi = document.createElement('li');
             ingLi.innerText = item;
             listIngredient.appendChild(ingLi);
+
+            ingLi.addEventListener('click' , function(e) {
+                const newDropIngredients = document.createElement('div')
+                const p = document.createElement('p')
+                const iCircle = document.createElement('i')
+                iCircle.className = "fa-regular fa-circle-xmark"
+                newDropIngredients.className = 'dropdown-ingredients-tag'
+                newDropIngredients.appendChild(p)
+                newDropIngredients.appendChild(iCircle)
+                p.innerHTML = e.target.innerHTML
+                tagField.appendChild(newDropIngredients)
+                
+                iCircle.addEventListener('click' , function(e) {
+                    newDropIngredients.style.display = "none"
+                })
+            })
         })
 }
 
@@ -81,15 +116,50 @@ function ustensilsItem(){
         let ustenLi = document.createElement('li');
         ustenLi.innerText = item;
         listUstensils.appendChild(ustenLi)
+
+        ustenLi.addEventListener('click' , function(e) {
+            const newDropUstensils = document.createElement('div')
+            const p = document.createElement('p')
+            const iCircle = document.createElement('i')
+            iCircle.className = "fa-regular fa-circle-xmark"
+            newDropUstensils.className = 'dropdown-ustensils-tag'
+            newDropUstensils.appendChild(p)
+            newDropUstensils.appendChild(iCircle)
+            p.innerHTML = e.target.innerHTML
+            tagField.appendChild(newDropUstensils)
+            
+            iCircle.addEventListener('click' , function(e) {
+                newDropUstensils.style.display = "none"
+            })
+        })
     })
     console.log(ustensilsNoRepeat)
 }
 
+ingredientSearch.addEventListener('keyup', test)
 
+function test(e) {
 
+    const filter = e.target.value.toUpperCase();
+
+    const div =  document.getElementById("dropdown-ingredient-list");
+
+    const li = div.getElementsByTagName("li")
+
+    for( let i = 0; i < li.length; i++){
+       const txtValue = li[i].textContent || li[i].innerText;
+        if(txtValue.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "block";
+        }else{
+            li[i].style.display = "none";
+        }
+    }
+}
+// test()
 applianceItem()
 ingredientItem()
 ustensilsItem()
-// searchIngredient()
+
+
 
 

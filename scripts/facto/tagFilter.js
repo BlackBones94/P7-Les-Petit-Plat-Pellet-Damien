@@ -1,4 +1,4 @@
-export class TagAppliance{
+ class TagAppliance{
     constructor(data){
         this.id = data.id
         this.appliance = data.appliance
