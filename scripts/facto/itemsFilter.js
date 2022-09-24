@@ -1,61 +1,36 @@
 import {recipes} from "../data/recipes.js";
-import { dropdownIngredient } from "../index/index.js";
-import { dropdownAppareil } from "../index/index.js";
-import { dropdownUstensiles } from "../index/index.js";
+import { filterData } from "../index/index.js";
 
-const tableauItems = [];
-export const allAppliance = [];
+
+// tableau d'ingredient , appliance , ustensils
+const allAppliance = [];
 const allUstensils =[];
 const  allIngredients = [];
+
 let listAppareil = document.getElementById("dropdown-appareil-list");
 let listIngredient = document.getElementById("dropdown-ingredient-list");
 let listUstensils = document.getElementById("dropdown-ustensiles-list");
-const ingredientSearch = document.querySelector("#search-ingredient")
 const tagField = document.querySelector('.tag-section')
 
-/////////////////////// BOUCLE FOR //////////////////////////////
-
-for(let i=0; i< recipes.length; i++) {
-    let ingredients = recipes[i].ingredients;
-    ingredients.map(({ingredient}) =>{
-        allIngredients.push(`${ingredient.toLowerCase()}`);
-    } )
-}
-// console.log(dropdownIngredient)
-
-for(let i=0; i< recipes.length; i++) {
-    let ustensils = recipes[i].ustensils;
-    ustensils.filter((ustensil) =>{
-        allUstensils.push(ustensil)
-    })
-    // allUstensils.push(ustensils)
-}
-// console.log(allUstensils)
-
-for(let i=0; i< recipes.length; i++) {
-    let appliances = recipes[i].appliance;
-    allAppliance.push(appliances)
-}
-////////////////////////////////////////////////////////////////
-
 // creer tab global current recipes
-// mettre boucle for dans le tableau 
 // destructuring [... TEST] POUR TAB ET OBJET 
-// TRIER CONTENUE AVEC SORT
 
+// function appliance boucle pour recuperer tous les items avec for 
+// creation d'une const avec new set et l'application de la methode sort 
+function applianceItem(){
 
-// appareil 
-export function applianceItem(){
+    for(let i=0; i< recipes.length; i++) {
+        let appliances = recipes[i].appliance;
+        allAppliance.push(appliances)
+    }
 
     const applianceNoRepeat = new Set(allAppliance.sort());
-
     applianceNoRepeat.forEach((item) =>{
         let appLi = document.createElement('li')
         appLi.innerText = item;
         listAppareil.appendChild(appLi)
 
         // click  des element appliance 
-
         appLi.addEventListener('click' , function(e) {
             // finir tag section 
             const newDropAppliance = document.createElement('div')
@@ -67,22 +42,31 @@ export function applianceItem(){
             newDropAppliance.appendChild(iCircle)
             p.innerHTML = e.target.innerHTML
             tagField.appendChild(newDropAppliance)   
-            
+
+            // On click de la croix on remove l'élement entier
             iCircle.addEventListener('click' ,function(e) {
-                newDropAppliance.style.display ="none"
+                newDropAppliance.remove()
+                filterData()
             })
+            // On reutilise filterData pour ravoir nos recette ou nos messages d erreur 
+            filterData()
         })
-
-    
-    })
-
- 
+    });
 }
 
-// ingredients
-const ingredientNoRepeat = new Set(allIngredients.slice(0,30));
-
+// function ingredient boucle pour recuperer tous les items avec for 
+// creation d'une const avec new set et l'application de la methode sort et slice 
+// (peut etre mettre le tab d'ingredient en entier )
 function ingredientItem() {
+
+    for(let i=0; i< recipes.length; i++) {
+        let ingredients = recipes[i].ingredients;
+        ingredients.map(({ingredient}) =>{
+            allIngredients.push(`${ingredient.toLowerCase()}`);
+        } )
+    }
+
+    const ingredientNoRepeat = new Set(allIngredients.slice(0,32).sort());
 
         ingredientNoRepeat.forEach((item) =>{
             let ingLi = document.createElement('li');
@@ -100,66 +84,62 @@ function ingredientItem() {
                 p.innerHTML = e.target.innerHTML
                 tagField.appendChild(newDropIngredients)
                 
+                // On click de la croix on remove l'élement entier 
                 iCircle.addEventListener('click' , function(e) {
-                    newDropIngredients.style.display = "none"
+                    newDropIngredients.remove()
+                    filterData()
                 })
+                // On reutilise filterData pour ravoir nos recette ou nos messages d erreur 
+                filterData()
             })
         })
 }
 
-
-// ustensils
+// function ustensils boucle pour recuperer tous les items avec for 
+// creation d'une const avec new set et l'application de la methode sort et slice 
 function ustensilsItem(){
-    const ustensilsNoRepeat = new Set(allUstensils.slice(0,30));
+
+    for(let i=0; i< recipes.length; i++) {
+        let ustensils = recipes[i].ustensils;
+        ustensils.filter((ustensil) =>{
+            allUstensils.push(ustensil)
+        })
+    }
+    const ustensilsNoRepeat = new Set(allUstensils.slice(0,30).sort());
+    
 
     ustensilsNoRepeat.forEach((item) => {
         let ustenLi = document.createElement('li');
         ustenLi.innerText = item;
         listUstensils.appendChild(ustenLi)
+        // console.log(ustenLi , item)
 
         ustenLi.addEventListener('click' , function(e) {
             const newDropUstensils = document.createElement('div')
             const p = document.createElement('p')
+            // p.className = 'ustensils-custom'
             const iCircle = document.createElement('i')
             iCircle.className = "fa-regular fa-circle-xmark"
             newDropUstensils.className = 'dropdown-ustensils-tag'
             newDropUstensils.appendChild(p)
             newDropUstensils.appendChild(iCircle)
             p.innerHTML = e.target.innerHTML
-            tagField.appendChild(newDropUstensils)
-            
+            tagField.appendChild(newDropUstensils)       
+
+            // On click de la croix on remove l'élement entier 
             iCircle.addEventListener('click' , function(e) {
-                newDropUstensils.style.display = "none"
+                newDropUstensils.remove()
+                filterData()
             })
+            // On reutilise filterData pour ravoir nos recette ou nos messages d erreur 
+            filterData()
         })
+
+
     })
-    console.log(ustensilsNoRepeat)
 }
 
-ingredientSearch.addEventListener('keyup', test)
 
-function test(e) {
-
-    const filter = e.target.value.toUpperCase();
-
-    const div =  document.getElementById("dropdown-ingredient-list");
-
-    const li = div.getElementsByTagName("li")
-
-    for( let i = 0; i < li.length; i++){
-       const txtValue = li[i].textContent || li[i].innerText;
-        if(txtValue.toUpperCase().indexOf(filter) > -1) {
-            li[i].style.display = "block";
-        }else{
-            li[i].style.display = "none";
-        }
-    }
-}
-// test()
 applianceItem()
 ingredientItem()
 ustensilsItem()
-
-
-
-
