@@ -5,6 +5,7 @@ import { applianceItem } from "../facto/itemsFilter.js";
 import { ustensilsItem } from "../facto/itemsFilter.js";
 import { toLowerCaseInclude } from "../utils/lowerCase.js";
 
+// test
 
 // appel des selector et de currentRecipes, variable libre 
 export let currentRecipes = recipes;
