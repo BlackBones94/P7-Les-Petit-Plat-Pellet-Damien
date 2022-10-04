@@ -8,7 +8,6 @@ ingredientSearch.addEventListener('keyup', tagSearchIngredient)
 appareilSearch.addEventListener('keyup', tagSearchAppareil)
 ustensileSearch.addEventListener('keyup',tagSearchUstensile )
 
- // refacto en une fonction 
 
 function tagSearchIngredient(e) {
 

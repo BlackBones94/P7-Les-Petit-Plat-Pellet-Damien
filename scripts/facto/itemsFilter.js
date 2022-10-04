@@ -1,38 +1,36 @@
-import {recipes} from "../data/recipes.js";
 import { filterData } from "../index/index.js";
-
-
+import { currentRecipes } from "../index/index.js";
 // tableau d'ingredient , appliance , ustensils
-const allAppliance = [];
-const allUstensils =[];
-const  allIngredients = [];
+let allAppliance = [];
+let allUstensils =[];
+let  allIngredients = [];
 
 let listAppareil = document.getElementById("dropdown-appareil-list");
 let listIngredient = document.getElementById("dropdown-ingredient-list");
 let listUstensils = document.getElementById("dropdown-ustensiles-list");
-const tagField = document.querySelector('.tag-section')
-
-// creer tab global current recipes
-// destructuring [... TEST] POUR TAB ET OBJET 
+let tagField = document.querySelector('.tag-section')
 
 // function appliance boucle pour recuperer tous les items avec for 
 // creation d'une const avec new set et l'application de la methode sort 
-function applianceItem(){
+export function applianceItem(){
 
-    for(let i=0; i< recipes.length; i++) {
-        let appliances = recipes[i].appliance;
+    allAppliance = [];
+
+    for(let i=0; i< currentRecipes.length; i++) {
+        let appliances = currentRecipes[i].appliance;
         allAppliance.push(appliances)
     }
 
     const applianceNoRepeat = new Set(allAppliance.sort());
+
+    listAppareil.innerHTML= "";
     applianceNoRepeat.forEach((item) =>{
-        let appLi = document.createElement('li')
+        let appLi = document.createElement('li');
         appLi.innerText = item;
-        listAppareil.appendChild(appLi)
+        listAppareil.appendChild(appLi);
 
         // click  des element appliance 
         appLi.addEventListener('click' , function(e) {
-            // finir tag section 
             const newDropAppliance = document.createElement('div')
             const p = document.createElement('p')
             const iCircle = document.createElement('i')
@@ -43,6 +41,7 @@ function applianceItem(){
             p.innerHTML = e.target.innerHTML
             tagField.appendChild(newDropAppliance)   
 
+
             // On click de la croix on remove l'élement entier
             iCircle.addEventListener('click' ,function(e) {
                 newDropAppliance.remove()
@@ -52,21 +51,25 @@ function applianceItem(){
             filterData()
         })
     });
+
 }
 
 // function ingredient boucle pour recuperer tous les items avec for 
-// creation d'une const avec new set et l'application de la methode sort et slice 
+// creation d'une const avec new set et l'application de la methode sort  
 // (peut etre mettre le tab d'ingredient en entier )
-function ingredientItem() {
+export function ingredientItem() {
 
-    for(let i=0; i< recipes.length; i++) {
-        let ingredients = recipes[i].ingredients;
-        ingredients.map(({ingredient}) =>{
-            allIngredients.push(`${ingredient.toLowerCase()}`);
+    allIngredients = [];
+
+    for(let i=0; i< currentRecipes.length; i++) {
+        let ingredients = currentRecipes[i].ingredients;
+        ingredients.forEach(({ingredient}) =>{
+            allIngredients.push(`${ingredient}`);
         } )
     }
-
-    const ingredientNoRepeat = new Set(allIngredients.slice(0,32).sort());
+    // console.log(allIngredients)
+    listIngredient.innerHTML = "";
+    const ingredientNoRepeat = new Set(allIngredients.sort());
 
         ingredientNoRepeat.forEach((item) =>{
             let ingLi = document.createElement('li');
@@ -97,17 +100,19 @@ function ingredientItem() {
 
 // function ustensils boucle pour recuperer tous les items avec for 
 // creation d'une const avec new set et l'application de la methode sort et slice 
-function ustensilsItem(){
+export function ustensilsItem(){
 
-    for(let i=0; i< recipes.length; i++) {
-        let ustensils = recipes[i].ustensils;
+    allUstensils = [];
+
+    for(let i=0; i< currentRecipes.length; i++) {
+        let ustensils = currentRecipes[i].ustensils;
         ustensils.filter((ustensil) =>{
             allUstensils.push(ustensil)
         })
     }
     const ustensilsNoRepeat = new Set(allUstensils.slice(0,30).sort());
     
-
+    listUstensils.innerHTML = "";
     ustensilsNoRepeat.forEach((item) => {
         let ustenLi = document.createElement('li');
         ustenLi.innerText = item;
@@ -138,8 +143,3 @@ function ustensilsItem(){
 
     })
 }
-
-
-applianceItem()
-ingredientItem()
-ustensilsItem()

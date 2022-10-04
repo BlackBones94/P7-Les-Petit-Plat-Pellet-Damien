@@ -69,7 +69,6 @@ form{
 /* dropdown  */
 
 .dropBox{
-  padding-top: 5%;
   margin: 1% 10% 1% 10%;
 }
 
@@ -93,13 +92,13 @@ form{
   .card-section {
     display: grid;
     grid-template-columns: 1fr 1fr 0fr;
-    gap: 1%;
     margin: 1% 10% 1% 10%;
   }
 
   article{
     width: 380px;
     height: 364px;
+    padding-bottom: 8%;
   }
 
   .recipe-img{
@@ -230,7 +229,6 @@ form{
     border-radius: 5px;
     position: absolute;
     top: 50px;
-    /* right: 189px; */
     z-index: 1;
     width: 633px;
     height: 200px;
@@ -244,7 +242,6 @@ form{
       border-radius: 5px;
       position: absolute;
       top: 50px;
-      /* right: 189px; */
       z-index: 1;
       width: 633px;
       height: 200px;
@@ -259,13 +256,12 @@ form{
     top: 50px;
     z-index: 1;
     width: 633px;
-    height: 200px;
+    min-height: 200px;
     background-color: #3282F7;
     display: none;
   }
 
   #dropdown-ingredient-list, #dropdown-appareil-list ,#dropdown-ustensiles-list{
-    height: 200px;
     columns: 3;   
     overflow: auto;
     margin:0;
@@ -279,19 +275,21 @@ form{
     color: white;
     line-height: 21.6px;
     cursor: pointer;
+    height: 22px;
+    padding-bottom: 5px;
   }
+  
 
   /* tagSection */
 
   .tag-section{
     margin: 1% 10% 1% 10%;
-    padding-top: 5%;
     display: flex;
   }
 
   .dropdown-appliance-tag {
-    width: 107px;
-    height: 37px;
+    width: 135px;
+    height: 50px;
     border-radius: 5px;
     background-color: #68D9A4;
     display: flex;
@@ -300,8 +298,8 @@ form{
   }
 
   .dropdown-ingredients-tag{
-    width: 107px;
-    height: 37px;
+    width: 135px;
+    height: 50px;
     border-radius: 5px;
     background-color: #3282F7;
     display: flex;
@@ -310,8 +308,8 @@ form{
   }
 
   .dropdown-ustensils-tag{
-    width: 107px;
-    height: 37px;
+    width: 135px;
+    height: 50px;
     border-radius: 5px;
     background-color: #D04F4F;
     display: flex;
@@ -321,11 +319,12 @@ form{
 
   .dropdown-appliance-tag i , .dropdown-ingredients-tag i,.dropdown-ustensils-tag i {
     color : #FFFFFF;
-    padding-top: 12px;
+    padding-top: 19px;
   }
 
   .dropdown-appliance-tag p , .dropdown-ingredients-tag p , .dropdown-ustensils-tag p{
     padding-left: 5px;
+    padding-top: 5px;
     font-weight: 700;
     font-size: 14px;
     color: #FFFFFF;

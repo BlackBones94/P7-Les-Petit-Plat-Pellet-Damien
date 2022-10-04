@@ -1,22 +1,26 @@
 import {recipes} from "../data/recipes.js";
 import {CardRecip} from "../facto/recipes.js";
+import { ingredientItem } from "../facto/itemsFilter.js";
+import { applianceItem } from "../facto/itemsFilter.js";
+import { ustensilsItem } from "../facto/itemsFilter.js";
+import { toLowerCaseInclude } from "../utils/lowerCase.js";
 
 
-// appel des selector et de dataArray, variable libre 
-let dataArray;
+// appel des selector et de currentRecipes, variable libre 
+export let currentRecipes = recipes;
+
 const cardsSection = document.querySelector(".card-section")
 const searchBar = document.querySelector('#search')
-const iconeTag = document.querySelector('.icone-preview')
-const iconeTag2 = document.querySelector('.icone-preview-2')
-const iconeTag3 = document.querySelector('.icone-preview-3')
 
+
+ingredientItem()
 
 // function qui recupere recipe
 function getUser() {
-    const res = recipes
-    dataArray = orderList(res)
-    createRecipesList(dataArray)
-    // console.log(dataArray)
+    // const res = recipes
+    currentRecipes = orderList(recipes)
+    createRecipesList(currentRecipes)
+    // console.log(currentRecipes)
 }
 
 
@@ -54,7 +58,7 @@ function createRecipesList(userList) {
 searchBar.addEventListener("keyup" , filterData);
 
 // recuperation des tags en utilisant ${category} sur les querySelector > p 
-// Et les push dans l'arrauy tagNames selon leut innerText 
+// Et les push dans l'array tagNames selon leut innerText 
 function getUserSelectedTags(category) {
     const tagsNames = []
     const tagsNodeElements = document.querySelectorAll(`.dropdown-${category}-tag > p`)
@@ -63,13 +67,13 @@ function getUserSelectedTags(category) {
             tagsNames.push(tag.innerText)
         }
     }
-    console.log(tagsNames)
-
     return tagsNames
 }
 
 
 export function filterData(){
+    currentRecipes = orderList(recipes)
+
     cardsSection.innerHTML = "";
 
     const searchString = document.getElementById('search')?.value.toLowerCase();
@@ -82,6 +86,7 @@ export function filterData(){
         appliance: selectedTagsAppliance,
         ustensils: selectedTagsUstensils
     }
+
 
     // creation d'une function  formattedRecipeSubData avec les recipes et les  tagCategory en param
     //On utilisise switch case break pour donner l'instruction voulu et retourner ce que nous voulons 
@@ -104,18 +109,19 @@ export function filterData(){
         }
         return formattedSubData
     }
+    
 
     // const func pour faire match les tag selon les recettes 
     const isTagMatchWithRecipeData = function(tag, recipeSubData) {
         for ( let data of recipeSubData ) {
-            if ( data.toLowerCase().includes( tag.toLowerCase() ) ) {
-                return true
+            if(toLowerCaseInclude(data, tag.toLowerCase())){
+                return true;
             }
         }
     }
 
     // var filteredData qui nous compare par rapport a recipe les tag selectionner et les l'input principale
-    let filteredData = dataArray.filter( recipe => {
+    let filteredData = currentRecipes.filter( recipe => {
         for(const tagCategory in selectedTagsObject) {
             if ( selectedTagsObject[tagCategory].length > 0 ) {
                 for ( let tag of selectedTagsObject[tagCategory] ) {
@@ -123,33 +129,19 @@ export function filterData(){
                         return false
                     }
                 }
-                continue
-            } else {
-                continue
             }
         }
         return true
 	} );
 
-    // condition qui compare la recherche sur l'input de search bar la description les ingredient et le name 
-    filteredData = filteredData.filter(el => {
-        if(searchString) {
-            if(el.name.toLowerCase().includes(searchString)){
-                return true;
-            } 
-            
-            if( el.description.toLowerCase().includes(searchString)){
-                return true;
-            } 
-            for(let ingredient of el.ingredients){
-                if(ingredient.ingredient.toLowerCase().includes(searchString)){
-                    return true;
-                }  
-            }
-        } else {
-            return true;
-        }
-    });
+
+    // condition qui compare la recherche sur l'input de search bar  la description les ingredients et le name 
+    filteredData = filteredData.filter(el => 
+                toLowerCaseInclude(el.name, searchString) 
+                || toLowerCaseInclude(el.description, searchString) 
+                || el.ingredients.some(m => toLowerCaseInclude(m.ingredient, searchString))
+    );
+    currentRecipes = filteredData;
 
     // Si filteredData est egale a aucune card return message recette erreur 
     if(filteredData == 0 ){
@@ -170,62 +162,16 @@ export function filterData(){
                 <h5>Veuillez entrer plus de caractères dans le champ de recherche</h5>
             </div>
     </div>`;
-    } else {
+    } else { 
         createRecipesList(filteredData);
-
+        ingredientItem()
+        applianceItem()
+        ustensilsItem()
     };
 
 }
 
 getUser()
-
-
-
-
-/////////////////////////////////////////////////////////////////////////////////////
-
-// REFACTO LA TOTAL DANS UNE SEULE FONCTION  
-iconeTag.addEventListener("click", openModalIngredient);
-iconeTag2.addEventListener("click" , openModalAppareil);
-iconeTag3.addEventListener("click" , openModalUstensiles)
-
-
-export const dropdownIngredient = document.querySelector('.dropdown-ingredient')
-export const dropdownAppareil = document.querySelector('.dropdown-appareil')
-export const dropdownUstensiles = document.querySelector('.dropdown-ustensiles')
-const ingredientInput = document.getElementById('search-ingredient')
-const appareilInput = document.getElementById('search-appareil')
-const ustensileInput = document.getElementById('search-ustensiles')
-
-function openModalIngredient() {
-    if(dropdownIngredient.style.display === 'none') {
-        dropdownIngredient.style.display = 'block';
-        ingredientInput.style.width = '667px'
-    }else{
-        dropdownIngredient.style.display = 'none';
-        ingredientInput.style.width = "170px"
-    }
-}
-
-function openModalAppareil() {
-    if(dropdownAppareil.style.display === 'none'){
-        dropdownAppareil.style.display = 'block';
-        appareilInput.style.width = '667px'
-    }else{
-        dropdownAppareil.style.display = 'none';
-        appareilInput.style.width = "170px";
-    };
-}
-
-function openModalUstensiles() {
-    if(dropdownUstensiles.style.display === 'none'){
-        dropdownUstensiles.style.display = 'block';
-        ustensileInput.style.width = '667px'
-    }else{
-        dropdownUstensiles.style.display = 'none';
-        ustensileInput.style.width = "170px";
-    };
-}
-
-
-///////////////////////////////////////////////////////////////////////////
+ingredientItem()
+applianceItem()
+ustensilsItem()
