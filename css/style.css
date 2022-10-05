@@ -320,6 +320,7 @@ form{
   .dropdown-appliance-tag i , .dropdown-ingredients-tag i,.dropdown-ustensils-tag i {
     color : #FFFFFF;
     padding-top: 19px;
+    cursor: pointer;
   }
 
   .dropdown-appliance-tag p , .dropdown-ingredients-tag p , .dropdown-ustensils-tag p{

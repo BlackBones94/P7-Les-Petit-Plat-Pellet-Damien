@@ -136,12 +136,51 @@ export function filterData(){
 	} );
 
 
-    // condition qui compare la recherche sur l'input de search bar  la description les ingredients et le name 
-    filteredData = filteredData.filter(el => 
-                toLowerCaseInclude(el.name, searchString) 
-                || toLowerCaseInclude(el.description, searchString) 
-                || el.ingredients.some(m => toLowerCaseInclude(m.ingredient, searchString))
-    );
+    // condition qui compare la recherche sur l'input de search bar  la description les ingredients et le name
+    
+    // filteredData =  recipesSorted ;
+    let recipesSorted = []
+
+// filteredData =  recipesSorted 
+    for(let currentRecipes of recipes){
+        let nameArray = currentRecipes.name.split(" ");
+        let descArray = currentRecipes.description.split(" ")
+        let ingArray = currentRecipes.ingredients.map((ing) => {
+            return ing.ingredient;
+        })
+                    if(nameArray.some((el) => el.toLowerCase().includes(searchString))){
+                        recipesSorted.push(currentRecipes);
+                    }
+                    else if(descArray.some((el) => el.toLowerCase().includes(searchString))){
+                        recipesSorted.push(currentRecipes)
+                    }
+                    else if(ingArray.some((el) => el.toLowerCase().includes(searchString))){
+                        recipesSorted.push(currentRecipes)
+                    }
+                 
+    }
+
+    createRecipesList(recipesSorted);
+
+
+    // filteredData = filteredData.filter(el => {
+    //     if(searchString) {
+    //         if(el.name.toLowerCase().includes(searchString)){
+    //             return true;
+    //         } 
+
+    //         if( el.description.toLowerCase().includes(searchString)){
+    //             return true;
+    //         } 
+    //         for(let ingredient of el.ingredients){
+    //             if(ingredient.ingredient.toLowerCase().includes(searchString)){
+    //                 return true;
+    //             }  
+    //         }
+    //     } else {
+    //         return true;
+    //     }
+    // });
     currentRecipes = filteredData;
 
     // Si filteredData est egale a aucune card return message recette erreur 
@@ -163,8 +202,9 @@ export function filterData(){
                 <h5>Veuillez entrer plus de caractères dans le champ de recherche</h5>
             </div>
     </div>`;
-    } else { 
-        createRecipesList(filteredData);
+    } else {     
+
+        // createRecipesList(filteredData) 
         ingredientItem()
         applianceItem()
         ustensilsItem()
