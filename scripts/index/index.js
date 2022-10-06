@@ -77,15 +77,15 @@ export function filterData(){
     cardsSection.innerHTML = "";
 
     const searchString = document.getElementById('search')?.value.toLowerCase();
-    const selectedTagsIngredients = getUserSelectedTags('ingredients')
-    const selectedTagsAppliance = getUserSelectedTags('appliance')
-    const selectedTagsUstensils = getUserSelectedTags('ustensils')
+    const selectedTagsIngredients = getUserSelectedTags('ingredients');
+    const selectedTagsAppliance = getUserSelectedTags('appliance');
+    const selectedTagsUstensils = getUserSelectedTags('ustensils');
 
     const selectedTagsObject = {
         ingredients: selectedTagsIngredients,
         appliance: selectedTagsAppliance,
         ustensils: selectedTagsUstensils
-    }
+    };
 
 
     // creation d'une function  formattedRecipeSubData avec les recipes et les  tagCategory en param
@@ -93,22 +93,22 @@ export function filterData(){
     // selon que ce soit un ingredient une aplliance ou un ustensil
     // nous retournons le resultat dans l'array formattedSubData
     const formattedRecipeSubData = function(recipe, tagCategory) {
-        let formattedSubData = []
+        let formattedSubData = [];
         switch (tagCategory) {
             case 'ingredients':
-                formattedSubData = recipe.ingredients.map((el) => el.ingredient)
+                formattedSubData = recipe.ingredients.map((el) => el.ingredient);
                 break;
             case 'appliance':
-                formattedSubData = [recipe.appliance]
+                formattedSubData = [recipe.appliance];
                 break;
             case 'ustensils':
-                formattedSubData = recipe.ustensils
+                formattedSubData = recipe.ustensils;
                 break;
             default:
                 break;
         }
-        return formattedSubData
-    }
+        return formattedSubData;
+    };
     
 
     // const func pour faire match les tag selon les recettes 
@@ -118,7 +118,7 @@ export function filterData(){
                 return true;
             }
         }
-    }
+    };
 
     // var filteredData qui nous compare par rapport a recipe les tag selectionner et les l'input principale
     let filteredData = currentRecipes.filter( recipe => {
@@ -126,12 +126,12 @@ export function filterData(){
             if ( selectedTagsObject[tagCategory].length > 0 ) {
                 for ( let tag of selectedTagsObject[tagCategory] ) {
                     if ( !isTagMatchWithRecipeData(tag, formattedRecipeSubData(recipe, tagCategory)) ) {
-                        return false
+                        return false;
                     }
                 }
             }
         }
-        return true
+        return true;
 	} );
 
 
@@ -152,7 +152,7 @@ export function filterData(){
                     chercher « tarte aux pommes », « poisson », etc.</h5>
                 </div>
         </div>`;
-    };
+    }
 
     // si longueur du message dans input est inferieur a 3 caractére return  message erreur
     if(searchString.length < 3 && searchString.length > 0){
@@ -164,10 +164,10 @@ export function filterData(){
     </div>`;
     } else { 
         createRecipesList(filteredData);
-        ingredientItem()
-        applianceItem()
-        ustensilsItem()
-    };
+        ingredientItem();
+        applianceItem();
+        ustensilsItem();
+    }
 
 }
 
