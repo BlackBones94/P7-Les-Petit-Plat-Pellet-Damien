@@ -160,27 +160,8 @@ export function filterData(){
                  
     }
 
-    createRecipesList(recipesSorted);
+    // createRecipesList(recipesSorted);
 
-
-    // filteredData = filteredData.filter(el => {
-    //     if(searchString) {
-    //         if(el.name.toLowerCase().includes(searchString)){
-    //             return true;
-    //         } 
-
-    //         if( el.description.toLowerCase().includes(searchString)){
-    //             return true;
-    //         } 
-    //         for(let ingredient of el.ingredients){
-    //             if(ingredient.ingredient.toLowerCase().includes(searchString)){
-    //                 return true;
-    //             }  
-    //         }
-    //     } else {
-    //         return true;
-    //     }
-    // });
     currentRecipes = filteredData;
 
     // Si filteredData est egale a aucune card return message recette erreur 
@@ -204,7 +185,7 @@ export function filterData(){
     </div>`;
     } else {     
 
-        // createRecipesList(filteredData) 
+        createRecipesList(recipesSorted) 
         ingredientItem()
         applianceItem()
         ustensilsItem()
