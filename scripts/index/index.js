@@ -138,10 +138,8 @@ export function filterData(){
 
     // condition qui compare la recherche sur l'input de search bar  la description les ingredients et le name
     
-    // filteredData =  recipesSorted ;
     let recipesSorted = []
 
-// filteredData =  recipesSorted 
     for(let currentRecipes of recipes){
         let nameArray = currentRecipes.name.split(" ");
         let descArray = currentRecipes.description.split(" ")
