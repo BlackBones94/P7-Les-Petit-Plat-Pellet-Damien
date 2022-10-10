@@ -5,12 +5,12 @@ import { applianceItem } from "../facto/itemsFilter.js";
 import { ustensilsItem } from "../facto/itemsFilter.js";
 import { toLowerCaseInclude } from "../utils/lowerCase.js";
 
+const cardsSection = document.querySelector(".card-section")
+const searchBar = document.querySelector('#search')
 
 // appel des selector et de currentRecipes, variable libre 
 export let currentRecipes = recipes;
 
-const cardsSection = document.querySelector(".card-section")
-const searchBar = document.querySelector('#search')
 
 
 ingredientItem()
@@ -109,6 +109,7 @@ export function filterData(){
         }
         return formattedSubData;
     };
+
     
 
     // const func pour faire match les tag selon les recettes 
@@ -134,13 +135,14 @@ export function filterData(){
         return true;
 	} );
 
-
     // condition qui compare la recherche sur l'input de search bar  la description les ingredients et le name 
     filteredData = filteredData.filter(el => 
                 toLowerCaseInclude(el.name, searchString) 
                 || toLowerCaseInclude(el.description, searchString) 
                 || el.ingredients.some(m => toLowerCaseInclude(m.ingredient, searchString))
     );
+    console.log(filteredData)
+
     currentRecipes = filteredData;
 
     // Si filteredData est egale a aucune card return message recette erreur 
