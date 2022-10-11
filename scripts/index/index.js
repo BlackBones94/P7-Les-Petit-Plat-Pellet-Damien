@@ -138,24 +138,26 @@ export function filterData(){
 
     // condition qui compare la recherche sur l'input de search bar  la description les ingredients et le name
     
-    let recipesSorted = []
+    let recipesSorted = [];
 
     for(let currentRecipes of recipes){
-        let nameArray = currentRecipes.name.split(" ");
-        let descArray = currentRecipes.description.split(" ")
+        let nameArray = currentRecipes.name
+        let descArray = currentRecipes.description
         let ingArray = currentRecipes.ingredients.map((ing) => {
             return ing.ingredient;
         })
-                    if(nameArray.some((el) => el.toLowerCase().includes(searchString))){
-                        recipesSorted.push(currentRecipes);
-                    }
-                    else if(descArray.some((el) => el.toLowerCase().includes(searchString))){
-                        recipesSorted.push(currentRecipes)
-                    }
-                    else if(ingArray.some((el) => el.toLowerCase().includes(searchString))){
-                        recipesSorted.push(currentRecipes)
-                    }
-                 
+        let ingredientInside = false;
+        
+        for(let ingredient of ingArray){
+            if(ingredient.toLowerCase().includes(searchString)){
+                ingredientInside = true 
+            }
+        }
+            
+        if(nameArray.toLowerCase().includes(searchString) || descArray.toLowerCase().includes(searchString) || ingredientInside){
+            recipesSorted.push(currentRecipes)
+        }
+        console.log(recipesSorted)
     }
 
     // createRecipesList(recipesSorted);
