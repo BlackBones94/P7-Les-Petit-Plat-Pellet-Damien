@@ -141,20 +141,16 @@ export function filterData(){
     let recipesSorted = [];
 
     for(let currentRecipes of recipes){
-        let nameArray = currentRecipes.name
-        let descArray = currentRecipes.description
-        let ingArray = currentRecipes.ingredients.map((ing) => {
-            return ing.ingredient;
-        })
+       
         let ingredientInside = false;
         
-        for(let ingredient of ingArray){
-            if(ingredient.toLowerCase().includes(searchString)){
-                ingredientInside = true 
+        for(let i ; i < currentRecipes.ingredients.length ; i++){
+            if(currentRecipes.ingredients[i].ingredient.toLowerCase().includes(searchString)){
+                ingredientInside = true; 
             }
         }
             
-        if(nameArray.toLowerCase().includes(searchString) || descArray.toLowerCase().includes(searchString) || ingredientInside){
+        if(currentRecipes.name.toLowerCase().includes(searchString) || currentRecipes.description.toLowerCase().includes(searchString) || ingredientInside){
             recipesSorted.push(currentRecipes)
         }
         console.log(recipesSorted)
