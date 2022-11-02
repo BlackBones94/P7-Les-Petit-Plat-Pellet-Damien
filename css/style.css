@@ -89,21 +89,57 @@ form{
 
   /* card recipe */
 
-  .card-section {
-    display: grid;
-    grid-template-columns: 1fr 1fr 0fr;
-    margin: 1% 10% 1% 10%;
+
+
+.card-section {
+  display: grid;
+  grid-template-columns: 0fr ;
+  justify-content: center;
   }
+
+  @media  (min-width : 850px) {
+    .card-section {
+      display: grid;
+      grid-template-columns: 0fr 0fr ;
+      column-gap: 50px;
+      margin: 1% 10% 1% 10%;
+    }
+  
+    article{
+      width: 380px;
+      height: 364px;
+      padding-top: 8%;
+      justify-content: center;
+    }
+  }
+
+  @media  (min-width : 1325px) {
+    .card-section {
+      display: grid;
+      grid-template-columns: 0fr 0fr 0fr;
+      column-gap: 50px;
+      margin: 1% 10% 1% 10%;
+    }
+  
+    article{
+      width: 380px;
+      height: 364px;
+      padding-top: 8%;
+      justify-content: center;
+    }
+  }
+
 
   article{
     width: 380px;
     height: 364px;
-    padding-bottom: 8%;
+    padding-top: 8%;
+    padding-left: 10px;
   }
 
   .recipe-img{
     position: relative;
-    top: 1%;
+    top: 2%;
   }
   .recipe-detail{
     background-color: #E7E7E7;
